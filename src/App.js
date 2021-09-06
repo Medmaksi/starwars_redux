@@ -7,24 +7,17 @@ import People from "./components/People";
 
 function App({state, getPeople, getPlanets}) {
     const [content, setContent] = useState('');
-
     useEffect(() => {
-        (
-           () => {
-                getPeople().then(() => setContent('people'))
-            }
-        )();
+        getPeople().then(() => setContent('people'))
     }, []);
     return (
       <div className="App">
           <h1>Star Wars Info</h1>
           <button onClick={() => {
-              getPeople();
-              setContent('people');
+              getPeople().then(() => setContent('people'));
           }}>Get People</button>
           <button onClick={() => {
-              getPlanets();
-              setContent('planets');
+              getPlanets().then(() => setContent('planets'));
           }}>Get Planets</button>
           <div className="content">
               {content !== '' ? state.results.map((elem, index) => {
